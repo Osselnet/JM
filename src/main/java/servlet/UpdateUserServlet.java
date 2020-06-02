@@ -1,7 +1,7 @@
 package servlet;
 
 import model.User;
-import util.Utils;
+import service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,27 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 @WebServlet("/update")
 public class UpdateUserServlet extends HttpServlet {
 
-    private Map<Integer, User> users;
-
-    @Override
-    public void init() throws ServletException {
-
-        final Object users = getServletContext().getAttribute("users");
-
-        if (users == null || !(users instanceof ConcurrentHashMap)) {
-
-            throw new IllegalStateException("You're repo does not initialize!");
-        } else {
-
-            this.users = (ConcurrentHashMap<Integer, User>) users;
-        }
-    }
+    UserService userService = new UserService();
+    User user;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -40,8 +25,8 @@ public class UpdateUserServlet extends HttpServlet {
         final String id = req.getParameter("id");
         final String name = req.getParameter("name");
 
-        final User user = users.get(Integer.parseInt(id));
         user.setName(name);
+        userService.update(user);
 
         resp.sendRedirect(req.getContextPath() + "/");
     }
@@ -52,12 +37,7 @@ public class UpdateUserServlet extends HttpServlet {
 
         final String id = req.getParameter("id");
 
-        if (Utils.idIsInvalid(id, users)) {
-            resp.sendRedirect(req.getContextPath() + "/");
-            return;
-        }
-
-        final User user = users.get(Integer.parseInt(id));
+        user = userService.getClientById(Integer.parseInt(id));
         req.setAttribute("user", user);
 
         req.getRequestDispatcher("/WEB-INF/view/update.jsp")

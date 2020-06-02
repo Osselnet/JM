@@ -2,13 +2,13 @@ package model;
 
 public class User {
 
-    private int id;
+    private long id;
 
     private String name;
 
-    private int age;
+    private long age;
 
-    public User(int id, String name, int age) {
+    public User(long id, String name, long age) {
         this.name = name;
         this.age = age;
     }
@@ -24,11 +24,11 @@ public class User {
         this.name = name;
     }
 
-    public int getAge() {
+    public long getAge() {
         return age;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

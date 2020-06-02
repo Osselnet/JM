@@ -1,6 +1,7 @@
 package servlet;
 
 import model.User;
+import service.UserService;
 import util.Utils;
 
 import javax.servlet.ServletException;
@@ -9,33 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @WebServlet("/add_user")
 public class AddUserServlet extends HttpServlet {
 
-    private Map<Integer, User> users;
+    UserService userService = new UserService();
 
-    private AtomicInteger id;
-
-    @Override
-    public void init() throws ServletException {
-
-        final Object users = getServletContext().getAttribute("users");
-
-        if (users == null || !(users instanceof ConcurrentHashMap)) {
-
-            throw new IllegalStateException("You're repo does not initialize!");
-        } else {
-
-            this.users = (ConcurrentHashMap<Integer, User>) users;
-        }
-
-        id = new AtomicInteger(2);
-
-    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -49,12 +29,10 @@ public class AddUserServlet extends HttpServlet {
             final String age = req.getParameter("age");
 
             final User user = new User();
-            final int id = this.id.getAndIncrement();
-            user.setId(id);
             user.setAge(Integer.valueOf(age));
             user.setName(name);
 
-            users.put(id, user);
+            userService.addUser(user);
         }
 
         resp.sendRedirect(req.getContextPath() + "/");
