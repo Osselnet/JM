@@ -32,7 +32,7 @@
 
 </c:forEach>
 
-<h2>Создание нового пользователя</h2><br />
+<h2>Добавление нового пользователя</h2><br />
 
 <form method="post" action="<c:url value='/add_user'/>">
 

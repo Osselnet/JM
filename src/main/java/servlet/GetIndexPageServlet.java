@@ -1,6 +1,7 @@
 package servlet;
 
 import model.User;
+import service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +14,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @WebServlet("/")
 public class GetIndexPageServlet extends HttpServlet {
+
+    UserService userService = new UserService();
 
     private Map<Integer, User> users;
 
@@ -33,8 +36,8 @@ public class GetIndexPageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-
-        req.setAttribute("users", users.values());
+        //req.setAttribute("users", users.values());
+        req.setAttribute("users",  userService.getAllUser());
         req.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(req, resp);
     }
 }
