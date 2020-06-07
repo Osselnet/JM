@@ -1,19 +1,30 @@
 package service;
 
 import dao.UserDAO;
-import dao.UserJDBCDAO;
+import dao.UserHibernateDAO;
 import model.User;
+import org.hibernate.SessionFactory;
+import util.DBHelper;
 
-import java.sql.Connection;
-import java.sql.Driver;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserService {
 
-    public UserService() {
+    private static UserService userService;
+
+    private SessionFactory sessionFactory;
+
+    private UserService(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    public static UserService getInstance() {
+        if (userService == null) {
+            userService = new UserService(DBHelper.getSessionFactory());
+        }
+        return userService;
     }
 
     public List<User> getAllUser() {
@@ -49,23 +60,23 @@ public class UserService {
         }
     }
 
-    public User getClientById(int id) {
+    public User getUserById(int id) {
         try {
-            return getUsertDAO().getClientById(id);
+            return getUsertDAO().getUserById(id);
         } catch (SQLException e) {
             return null;
         }
     }
 
     public void createTable() {
-        UserDAO dao = getUsertDAO();
         try {
-            dao.createTable();
+            getUsertDAO().createTable();
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
     }
 
+/*
     private static Connection getMysqlConnection() {
         try {
             DriverManager.registerDriver((Driver) Class.forName("com.mysql.jdbc.Driver").newInstance());
@@ -89,8 +100,11 @@ public class UserService {
             throw new IllegalStateException();
         }
     }
+*/
 
-    private static UserDAO getUsertDAO() {
-        return new UserJDBCDAO(getMysqlConnection());
+    private UserDAO getUsertDAO() {
+        //return new UserJdbcDAO(getMysqlConnection());
+        return new UserHibernateDAO(sessionFactory.openSession());
     }
+
 }

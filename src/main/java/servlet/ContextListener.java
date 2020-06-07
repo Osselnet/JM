@@ -1,7 +1,6 @@
 package servlet;
 
-import model.User;
-import service.UserService;
+import util.DBHelper;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -10,12 +9,11 @@ import javax.servlet.annotation.WebListener;
 @WebListener
 public class ContextListener implements ServletContextListener {
 
-    UserService userService = new UserService();
-
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
 
-        userService.createTable();
+        //userService.createTable();
+        DBHelper dbHelper = new DBHelper();
     }
 
     @Override

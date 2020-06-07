@@ -6,11 +6,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserJDBCDAO implements UserDAO{
+public class UserJdbcDAO implements UserDAO {
 
     private Connection connection;
 
-    public UserJDBCDAO(Connection connection) {
+    public UserJdbcDAO(Connection connection) {
         this.connection = connection;
     }
 
@@ -31,9 +31,9 @@ public class UserJDBCDAO implements UserDAO{
     }
 
     @Override
-    public void delete(int userId) throws SQLException {
+    public void delete(int id) throws SQLException {
         Statement stmt = connection.createStatement();
-        stmt.execute("DELETE FROM users WHERE id=" + userId);
+        stmt.execute("DELETE FROM users WHERE id=" + id);
         stmt.close();
     }
 
@@ -53,7 +53,7 @@ public class UserJDBCDAO implements UserDAO{
     }
 
     @Override
-    public User getClientById(int id) throws SQLException {
+    public User getUserById(int id) throws SQLException {
         Statement stmt = connection.createStatement();
         stmt.execute("select * from users where id=" + id);
         ResultSet result = stmt.getResultSet();

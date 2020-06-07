@@ -12,15 +12,12 @@ import java.io.IOException;
 @WebServlet("/delete")
 public class DeleteUserServlet extends HttpServlet {
 
-    UserService userService = new UserService();
-
-
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
         req.setCharacterEncoding("UTF-8");
 
-        userService.deleteUser(Integer.valueOf(req.getParameter("id")));
+        UserService.getInstance().deleteUser(Integer.valueOf(req.getParameter("id")));
 
         resp.sendRedirect(req.getContextPath() + "/");
     }

@@ -14,9 +14,6 @@ import java.io.IOException;
 @WebServlet("/add_user")
 public class AddUserServlet extends HttpServlet {
 
-    UserService userService = new UserService();
-
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -32,7 +29,7 @@ public class AddUserServlet extends HttpServlet {
             user.setAge(Integer.valueOf(age));
             user.setName(name);
 
-            userService.addUser(user);
+            UserService.getInstance().addUser(user);
         }
 
         resp.sendRedirect(req.getContextPath() + "/");

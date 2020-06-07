@@ -13,7 +13,6 @@ import java.io.IOException;
 @WebServlet("/update")
 public class UpdateUserServlet extends HttpServlet {
 
-    UserService userService = new UserService();
     User user;
 
     @Override
@@ -26,7 +25,7 @@ public class UpdateUserServlet extends HttpServlet {
         final String name = req.getParameter("name");
 
         user.setName(name);
-        userService.update(user);
+        UserService.getInstance().update(user);
 
         resp.sendRedirect(req.getContextPath() + "/");
     }
@@ -37,7 +36,7 @@ public class UpdateUserServlet extends HttpServlet {
 
         final String id = req.getParameter("id");
 
-        user = userService.getClientById(Integer.parseInt(id));
+        user = UserService.getInstance().getUserById(Integer.parseInt(id));
         req.setAttribute("user", user);
 
         req.getRequestDispatcher("/WEB-INF/view/update.jsp")
