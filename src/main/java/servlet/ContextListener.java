@@ -12,7 +12,6 @@ public class ContextListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
 
-        //userService.createTable();
         DBHelper dbHelper = new DBHelper();
     }
 

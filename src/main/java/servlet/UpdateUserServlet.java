@@ -1,7 +1,7 @@
 package servlet;
 
 import model.User;
-import service.UserService;
+import service.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,7 +25,7 @@ public class UpdateUserServlet extends HttpServlet {
         final String name = req.getParameter("name");
 
         user.setName(name);
-        UserService.getInstance().update(user);
+        UserServiceImpl.getInstance().update(user);
 
         resp.sendRedirect(req.getContextPath() + "/");
     }
@@ -36,7 +36,7 @@ public class UpdateUserServlet extends HttpServlet {
 
         final String id = req.getParameter("id");
 
-        user = UserService.getInstance().getUserById(Integer.parseInt(id));
+        user = UserServiceImpl.getInstance().getUserById(Integer.parseInt(id));
         req.setAttribute("user", user);
 
         req.getRequestDispatcher("/WEB-INF/view/update.jsp")

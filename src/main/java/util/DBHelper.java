@@ -1,17 +1,10 @@
 package util;
 
-import model.Users;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
+import model.User;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.internal.SessionFactoryImpl;
 import org.hibernate.service.ServiceRegistry;
-
-import java.sql.Connection;
-import java.sql.SQLException;
 
 
 public class DBHelper {
@@ -33,7 +26,7 @@ public class DBHelper {
     @SuppressWarnings("UnusedDeclaration")
     private static Configuration getMySqlConfiguration() {
         Configuration configuration = new Configuration();
-        configuration.addAnnotatedClass(Users.class);
+        configuration.addAnnotatedClass(User.class);
 
         configuration.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
         configuration.setProperty("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");

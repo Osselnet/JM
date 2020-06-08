@@ -1,6 +1,6 @@
 package servlet;
 
-import service.UserService;
+import service.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +17,7 @@ public class DeleteUserServlet extends HttpServlet {
 
         req.setCharacterEncoding("UTF-8");
 
-        UserService.getInstance().deleteUser(Integer.valueOf(req.getParameter("id")));
+        UserServiceImpl.getInstance().deleteUser(Integer.valueOf(req.getParameter("id")));
 
         resp.sendRedirect(req.getContextPath() + "/");
     }
