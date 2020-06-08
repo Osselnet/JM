@@ -9,6 +9,7 @@ public class User {
     private long age;
 
     public User(long id, String name, long age) {
+        this.id = id;
         this.name = name;
         this.age = age;
     }
