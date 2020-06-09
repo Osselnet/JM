@@ -2,6 +2,8 @@ package servlet;
 
 import model.User;
 import service.UserService;
+import service.UserServiceImpl;
+import util.Utils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +15,6 @@ import java.io.IOException;
 @WebServlet("/update")
 public class UpdateUserServlet extends HttpServlet {
 
-    UserService userService = new UserService();
     User user;
 
     @Override
@@ -26,7 +27,7 @@ public class UpdateUserServlet extends HttpServlet {
         final String name = req.getParameter("name");
 
         user.setName(name);
-        userService.update(user);
+        UserServiceImpl.getInstance().update(user);
 
         resp.sendRedirect(req.getContextPath() + "/");
     }
@@ -35,11 +36,10 @@ public class UpdateUserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        final String id = req.getParameter("id");
-
-        user = userService.getClientById(Integer.parseInt(id));
-        req.setAttribute("user", user);
-
+        if (Utils.idIsNumber(req)) {
+            user = UserServiceImpl.getInstance().getUserById(Integer.parseInt(req.getParameter("id")));
+            req.setAttribute("user", user);
+        }
         req.getRequestDispatcher("/WEB-INF/view/update.jsp")
                 .forward(req, resp);
     }
