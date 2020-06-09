@@ -1,6 +1,7 @@
 package service;
 
 import dao.UserDAO;
+import dao.UserDaoFactory;
 import dao.UserHibernateDAO;
 import model.User;
 
@@ -49,10 +50,8 @@ public class UserServiceImpl implements UserService {
         getUsertDAO().createTable();
     }
 
-
     private UserDAO getUsertDAO() {
-        //return new UserJdbcDAO();
-        return new UserHibernateDAO();
+        return UserDaoFactory.configure();
     }
 
 }

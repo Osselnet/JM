@@ -12,7 +12,7 @@ public class ContextListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
 
-        DBHelper dbHelper = new DBHelper();
+        //DBHelper dbHelper = new DBHelper();
     }
 
     @Override
