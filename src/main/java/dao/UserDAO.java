@@ -1,20 +1,18 @@
 package dao;
 
 import model.User;
-
-import java.sql.SQLException;
 import java.util.List;
 
 public interface UserDAO {
-    public void insert(User user);
+    void insert(User user);
 
-    public void update(User user);
+    void update(User user);
 
-    public void delete(long id);
+    void delete(long id);
 
-    public List<User> getAllUser();
+    List<User> getAllUser();
 
-    public void createTable();
+    void createTable();
 
-    public User getUserById(long id);
+    User getUserById(long id);
 }

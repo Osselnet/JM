@@ -12,7 +12,7 @@ public class DBHelper {
     private static SessionFactory sessionFactory;
 
     public DBHelper() {
-        Configuration configuration = getMySqlConfiguration();
+        //Configuration configuration = getMySqlConfiguration();
         getSessionFactory();
     }
 

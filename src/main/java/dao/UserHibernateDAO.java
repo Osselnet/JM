@@ -24,7 +24,7 @@ public class UserHibernateDAO implements UserDAO {
 
     @Override
     public void update(User user) {
-        Query query = session.createQuery("UPDATE User SET name = :userName WHERE id = :userId");
+        Query query = session.createQuery("update User set name = :userName where id = :userId");
         query.setParameter("userName", user.getName());
         query.setParameter("userId", user.getId());
         query.executeUpdate();
@@ -33,7 +33,7 @@ public class UserHibernateDAO implements UserDAO {
 
     @Override
     public void delete(long id) {
-        Query query = session.createQuery("DELETE User WHERE id = :userId");
+        Query query = session.createQuery("delete User where id = :userId");
         query.setParameter("userId", id);
         query.executeUpdate();
         session.close();
@@ -41,7 +41,7 @@ public class UserHibernateDAO implements UserDAO {
 
     @Override
     public List<User> getAllUser() {
-        List<User> users = session.createQuery("FROM User").list();
+        List<User> users = session.createQuery("from User").list();
         session.close();
         return users;
     }

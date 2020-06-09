@@ -24,7 +24,7 @@ public class UserJdbcDAO implements UserDAO {
 
     @Override
     public void update(User user) {
-        try (PreparedStatement stmt = connection.prepareStatement("UPDATE users SET name = ? where id = ?")) {
+        try (PreparedStatement stmt = connection.prepareStatement("update users set name = ? where id = ?")) {
             stmt.setString(1, user.getName());
             stmt.setLong(2, user.getId());
             stmt.executeUpdate();

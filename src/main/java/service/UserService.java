@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface UserService {
 
-    public List<User> getAllUser();
+    List<User> getAllUser();
 
-    public void deleteUser(int id);
+    void deleteUser(int id);
 
-    public void addUser(User user);
+    void addUser(User user);
 
-    public void update(User user);
+    void update(User user);
 
-    public User getUserById(int id);
+    User getUserById(int id);
 }

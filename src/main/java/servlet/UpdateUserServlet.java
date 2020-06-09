@@ -13,15 +13,14 @@ import java.io.IOException;
 @WebServlet("/update")
 public class UpdateUserServlet extends HttpServlet {
 
-    User user;
+    private User user;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
+            throws IOException {
 
         req.setCharacterEncoding("UTF-8");
 
-        final String id = req.getParameter("id");
         final String name = req.getParameter("name");
 
         user.setName(name);
