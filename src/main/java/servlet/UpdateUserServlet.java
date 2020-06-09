@@ -2,6 +2,7 @@ package servlet;
 
 import model.User;
 import service.UserServiceImpl;
+import util.Utils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,11 +34,10 @@ public class UpdateUserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        final String id = req.getParameter("id");
-
-        user = UserServiceImpl.getInstance().getUserById(Integer.parseInt(id));
-        req.setAttribute("user", user);
-
+        if (Utils.idIsNumber(req)) {
+            user = UserServiceImpl.getInstance().getUserById(Integer.parseInt(req.getParameter("id")));
+            req.setAttribute("user", user);
+        }
         req.getRequestDispatcher("/WEB-INF/view/update.jsp")
                 .forward(req, resp);
     }
