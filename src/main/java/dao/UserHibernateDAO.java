@@ -17,7 +17,6 @@ public class UserHibernateDAO implements UserDAO {
 
     @Override
     public void insert(User user) {
-        //User users = new User(user.getId(), user.getName(), user.getAge());
         session.save(user);
         session.close();
     }
@@ -48,7 +47,6 @@ public class UserHibernateDAO implements UserDAO {
 
     @Override
     public void createTable() {
-
     }
 
     @Override
@@ -57,7 +55,6 @@ public class UserHibernateDAO implements UserDAO {
         query.setParameter("userId", id);
         User user = (User) query.list().get(0);
         session.close();
-        //return new User(users.getId(), users.getName(), users.getAge());
         return user;
     }
 }

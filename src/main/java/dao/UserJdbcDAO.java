@@ -19,7 +19,7 @@ public class UserJdbcDAO implements UserDAO {
     public void insert(User user) {
         try (Statement stmt = connection.createStatement()) {
             stmt.execute("insert into users (name, age) VALUES ('" + user.getName() + "', " + user.getAge() + ")");
-        } catch (SQLException e) {
+        } catch (SQLException ignored) {
         }
     }
 
@@ -29,7 +29,7 @@ public class UserJdbcDAO implements UserDAO {
             stmt.setString(1, user.getName());
             stmt.setLong(2, user.getId());
             stmt.executeUpdate();
-        } catch (SQLException e) {
+        } catch (SQLException ignored) {
         }
     }
 
@@ -37,7 +37,7 @@ public class UserJdbcDAO implements UserDAO {
     public void delete(long id) {
         try (Statement stmt = connection.createStatement();) {
             stmt.execute("DELETE FROM users WHERE id=" + id);
-        } catch (SQLException e) {
+        } catch (SQLException ignored) {
         }
     }
 
@@ -52,7 +52,7 @@ public class UserJdbcDAO implements UserDAO {
                         result.getNString("name"), result.getInt("age")));
             }
             result.close();
-        } catch (SQLException e) {
+        } catch (SQLException ignored) {
         }
         return users;
     }
@@ -69,7 +69,7 @@ public class UserJdbcDAO implements UserDAO {
                     result.getInt("age")
             );
             result.close();
-        } catch (SQLException e) {
+        } catch (SQLException ignored) {
         }
         return user;
     }
