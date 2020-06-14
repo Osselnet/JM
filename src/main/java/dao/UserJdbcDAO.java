@@ -9,7 +9,7 @@ import java.util.List;
 
 public class UserJdbcDAO implements UserDAO {
 
-    private Connection connection;
+    private final Connection connection;
 
     public UserJdbcDAO() {
         this.connection = DBHelper.getConnection();
@@ -35,7 +35,7 @@ public class UserJdbcDAO implements UserDAO {
 
     @Override
     public void delete(long id) {
-        try (Statement stmt = connection.createStatement();) {
+        try (Statement stmt = connection.createStatement()) {
             stmt.execute("DELETE FROM users WHERE id=" + id);
         } catch (SQLException ignored) {
         }
@@ -72,6 +72,16 @@ public class UserJdbcDAO implements UserDAO {
         } catch (SQLException ignored) {
         }
         return user;
+    }
+
+    @Override
+    public boolean userIsExist(String login, String password) {
+        return false;
+    }
+
+    @Override
+    public String getRoleByLoginPassword(String login, String password) {
+        return null;
     }
 
     @Override

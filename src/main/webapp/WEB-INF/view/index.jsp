@@ -32,7 +32,7 @@
 
 </c:forEach>
 
-<h2>Добавление нового пользователя</h2><br />
+<h2>Добавление нового пользователя</h2><br/>
 
 <form method="post" action="<c:url value='/add_user'/>">
 
@@ -42,6 +42,6 @@
 
     <input type="submit" value="Ok" name="Ok"><br>
 </form>
-
+<a href="<c:url value="/logout"/>">Logout</a>
 </body>
 </html>

@@ -1,4 +1,4 @@
-package servlet;
+package servlets.servlet;
 
 import model.User;
 import service.UserServiceImpl;
@@ -27,7 +27,7 @@ public class UpdateUserServlet extends HttpServlet {
         user.setName(name);
         UserServiceImpl.getInstance().update(user);
 
-        resp.sendRedirect(req.getContextPath() + "/");
+        resp.sendRedirect(req.getContextPath() + "/admin");
     }
 
     @Override

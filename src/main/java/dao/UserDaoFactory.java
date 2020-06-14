@@ -1,6 +1,5 @@
 package dao;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
@@ -24,7 +23,6 @@ public class UserDaoFactory {
         try (final InputStream stream = UserDaoFactory.class.getClassLoader().getResourceAsStream("config.properties")) {
             property.load(stream);
             return property.getProperty("daotype");
-
         } catch (IOException e) {
             return "error";
         }

@@ -16,6 +16,15 @@ public class User {
     @Column(name = "age")
     private long age;
 
+    @Column(name = "login")
+    private String login;
+
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "role")
+    private String role;
+
     public User() {
     }
 
@@ -23,6 +32,14 @@ public class User {
         this.id = id;
         this.name = name;
         this.age = age;
+        login = "name";
+        if (name.equalsIgnoreCase("oleg")) {
+            password = "root";
+            role = "admin";
+        } else {
+            password = "123";
+            role = "user";
+        }
     }
 
     public String getName() {
@@ -47,5 +64,29 @@ public class User {
 
     public void setAge(long age) {
         this.age = age;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

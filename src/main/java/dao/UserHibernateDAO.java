@@ -9,7 +9,7 @@ import java.util.List;
 
 public class UserHibernateDAO implements UserDAO {
 
-    private Session session;
+    private final Session session;
 
     public UserHibernateDAO() {
         this.session = DBHelper.getSessionFactory().openSession();
@@ -39,6 +39,7 @@ public class UserHibernateDAO implements UserDAO {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<User> getAllUser() {
         List<User> users = session.createQuery("from User").list();
         session.close();
@@ -51,10 +52,26 @@ public class UserHibernateDAO implements UserDAO {
 
     @Override
     public User getUserById(long id) {
-        Query query = session.createQuery("FROM User WHERE id = :userId");
+        Query query = session.createQuery("from User where id = :userId");
         query.setParameter("userId", id);
         User user = (User) query.list().get(0);
         session.close();
         return user;
+    }
+
+    @Override
+    public boolean userIsExist(String login, String password) {
+        Query query = session.createQuery("from User where login = :userLogin and password = :userPassword");
+        query.setParameter("userLogin", login);
+        query.setParameter("userPassword", password);
+        return query.list().size() > 0;
+    }
+
+    @Override
+    public String getRoleByLoginPassword(String login, String password) {
+        Query query = session.createQuery("select role from User where login = :userLogin and password = :userPassword");
+        query.setParameter("userLogin", login);
+        query.setParameter("userPassword", password);
+        return (String) query.list().get(0);
     }
 }

@@ -15,4 +15,10 @@ public interface UserService {
     void update(User user);
 
     User getUserById(int id);
+
+    void createTable();
+
+    boolean userIsExist(String login, String password);
+
+    String getRoleByLoginPassword(String login, String password);
 }

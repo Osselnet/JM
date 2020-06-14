@@ -1,4 +1,4 @@
-package servlet;
+package servlets.servlet;
 
 import service.UserServiceImpl;
 
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/")
+@WebServlet("/admin")
 public class GetIndexPageServlet extends HttpServlet {
 
     @Override

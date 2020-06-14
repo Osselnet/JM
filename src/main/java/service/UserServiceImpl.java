@@ -14,6 +14,11 @@ public class UserServiceImpl implements UserService {
     private UserServiceImpl() {
     }
 
+
+    private UserDAO getUsertDAO() {
+        return UserDaoFactory.configure();
+    }
+
     public static UserServiceImpl getInstance() {
         if (userService == null) {
             userService = new UserServiceImpl();
@@ -46,12 +51,18 @@ public class UserServiceImpl implements UserService {
         return getUsertDAO().getUserById(id);
     }
 
+    @Override
     public void createTable() {
         getUsertDAO().createTable();
     }
 
-    private UserDAO getUsertDAO() {
-        return UserDaoFactory.configure();
+    @Override
+    public boolean userIsExist(String login, String password) {
+        return getUsertDAO().userIsExist(login, password);
     }
 
+    @Override
+    public String getRoleByLoginPassword(String login, String password) {
+        return getUsertDAO().getRoleByLoginPassword(login, password);
+    }
 }

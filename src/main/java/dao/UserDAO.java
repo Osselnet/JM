@@ -15,4 +15,8 @@ public interface UserDAO {
     void createTable();
 
     User getUserById(long id);
+
+    boolean userIsExist(String login, String password);
+
+    String getRoleByLoginPassword(String login, String password);
 }
