@@ -18,6 +18,6 @@ public class DeleteUserServlet extends HttpServlet {
 
         UserServiceImpl.getInstance().deleteUser(Integer.valueOf(req.getParameter("id")));
 
-        resp.sendRedirect(req.getContextPath() + "/");
+        resp.sendRedirect(req.getContextPath() + "/admin");
     }
 }

@@ -10,9 +10,9 @@ public class UserDaoFactory {
     public static UserDAO configure() {
         switch (Objects.requireNonNull(getProperty())) {
             case "UserJdbcDAO":
-                return new UserHibernateDAO();
-            case "UserHibernateDAO":
                 return new UserJdbcDAO();
+            case "UserHibernateDAO":
+                return new UserHibernateDAO();
             default:
                 return null;
         }

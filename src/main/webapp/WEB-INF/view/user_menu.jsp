@@ -8,7 +8,7 @@
 <body>
 
 <h2>Hello USER!</h2>
-
+<c:url value='/update'">
 <ul>
     <li>Имя: <c:out value="${user.name}"/></li>
 
