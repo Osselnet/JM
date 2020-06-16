@@ -75,6 +75,23 @@ public class UserJdbcDAO implements UserDAO {
     }
 
     @Override
+    public User getUserByName(String name) {
+        User user = null;
+        try (Statement stmt = connection.createStatement()) {
+            stmt.execute("select * from users where name=" + name);
+            ResultSet result = stmt.getResultSet();
+            result.next();
+            user = new User( result.getLong("id"),
+                    result.getNString("name"),
+                    result.getInt("age")
+            );
+            result.close();
+        } catch (SQLException ignored) {
+        }
+        return user;
+    }
+
+    @Override
     public boolean userIsExist(String login, String password) {
         return false;
     }

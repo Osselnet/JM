@@ -37,7 +37,7 @@ public class AuthFilter implements Filter {
 
             final String role = (String) session.getAttribute("role");
 
-            moveToMenu(req, res, role);
+            moveToMenu(req, res, role, login);
 
         } else if (UserServiceImpl.getInstance().userIsExist(login, password)) {
 
@@ -47,23 +47,25 @@ public class AuthFilter implements Filter {
             req.getSession().setAttribute("login", login);
             req.getSession().setAttribute("role", role);
 
-            moveToMenu(req, res, role);
+            moveToMenu(req, res, role, login);
 
         } else {
 
-            moveToMenu(req, res, "unknown");
+            moveToMenu(req, res, "unknown", login);
         }
     }
 
     private void moveToMenu(final HttpServletRequest req,
                             final HttpServletResponse res,
-                            final String role)
+                            final String role,
+                            final String login)
             throws ServletException, IOException {
 
         if (role.equals("admin")) {
             res.sendRedirect(req.getContextPath() + "/admin");
 
         } else if (role.equals("user")) {
+            req.setAttribute("user", UserServiceImpl.getInstance().getUserByName(login));
             req.getRequestDispatcher("/WEB-INF/view/user_menu.jsp").forward(req, res);
 
         } else {

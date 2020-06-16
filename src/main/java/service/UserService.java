@@ -16,6 +16,8 @@ public interface UserService {
 
     User getUserById(int id);
 
+    User getUserByName(String name);
+
     void createTable();
 
     boolean userIsExist(String login, String password);

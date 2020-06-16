@@ -2,7 +2,6 @@ package service;
 
 import dao.UserDAO;
 import dao.UserDaoFactory;
-import dao.UserHibernateDAO;
 import model.User;
 
 import java.util.List;
@@ -49,6 +48,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(int id) {
         return getUsertDAO().getUserById(id);
+    }
+
+    @Override
+    public User getUserByName(String name) {
+        return getUsertDAO().getUserByName(name);
     }
 
     @Override

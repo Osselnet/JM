@@ -7,19 +7,10 @@
 </head>
 <body>
 
-<h2>Hello USER!</h2>
-<c:url value='/update'">
-<ul>
-    <li>Имя: <c:out value="${user.name}"/></li>
+<h2>Hello <c:out value="${requestScope.user.name}"/>!</h2>
 
-    <li>Возраст: <c:out value="${user.age}"/></li>
-
-    <form method="get" action="<c:url value='/update'/>">
-        <input type="number" hidden name="id" value="${user.id}"/>
-        <input type="submit" value="Редактированть"/>
-    </form>
-</ul>
-<hr/>
+<div>Имя: <c:out value="${requestScope.user.name}"/></div>
+<div>Возраст: <c:out value="${requestScope.user.age}"/></div>
 
 <a href="<c:url value="/logout"/>">Logout</a>
 </body>

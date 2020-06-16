@@ -16,6 +16,8 @@ public interface UserDAO {
 
     User getUserById(long id);
 
+    User getUserByName(String name);
+
     boolean userIsExist(String login, String password);
 
     String getRoleByLoginPassword(String login, String password);
