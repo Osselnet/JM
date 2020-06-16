@@ -1,6 +1,7 @@
 package servlets.servlet;
 
 import model.User;
+import service.UserService;
 import service.UserServiceImpl;
 import util.Utils;
 
@@ -16,6 +17,8 @@ public class UpdateUserServlet extends HttpServlet {
 
     private User user;
 
+    private UserService userService = UserServiceImpl.getInstance();
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
@@ -25,7 +28,7 @@ public class UpdateUserServlet extends HttpServlet {
         final String name = req.getParameter("name");
 
         user.setName(name);
-        UserServiceImpl.getInstance().update(user);
+        userService.update(user);
 
         resp.sendRedirect(req.getContextPath() + "/admin");
     }
@@ -35,7 +38,7 @@ public class UpdateUserServlet extends HttpServlet {
             throws ServletException, IOException {
 
         if (Utils.idIsNumber(req)) {
-            user = UserServiceImpl.getInstance().getUserById(Integer.parseInt(req.getParameter("id")));
+            user = userService.getUserById(Integer.parseInt(req.getParameter("id")));
             req.setAttribute("user", user);
         }
         req.getRequestDispatcher("/WEB-INF/view/update.jsp")

@@ -1,5 +1,6 @@
 package servlets.filter;
 
+import service.UserService;
 import service.UserServiceImpl;
 
 import javax.servlet.*;
@@ -13,6 +14,8 @@ import static java.util.Objects.nonNull;
 
 @WebFilter("/")
 public class AuthFilter implements Filter {
+
+    private UserService userService = UserServiceImpl.getInstance();
 
     @Override
     public void init(FilterConfig filterConfig) {
@@ -39,9 +42,9 @@ public class AuthFilter implements Filter {
 
             moveToMenu(req, res, role, login);
 
-        } else if (UserServiceImpl.getInstance().userIsExist(login, password)) {
+        } else if (userService.userIsExist(login, password)) {
 
-            final String role = UserServiceImpl.getInstance().getRoleByLoginPassword(login, password);
+            final String role = userService.getRoleByLoginPassword(login, password);
 
             req.getSession().setAttribute("password", password);
             req.getSession().setAttribute("login", login);
@@ -65,7 +68,7 @@ public class AuthFilter implements Filter {
             res.sendRedirect(req.getContextPath() + "/admin");
 
         } else if (role.equals("user")) {
-            req.setAttribute("user", UserServiceImpl.getInstance().getUserByName(login));
+            req.setAttribute("user", userService.getUserByName(login));
             req.getRequestDispatcher("/WEB-INF/view/user_menu.jsp").forward(req, res);
 
         } else {
