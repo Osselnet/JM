@@ -1,6 +1,7 @@
 package servlet;
 
 import model.User;
+import service.UserService;
 import service.UserServiceImpl;
 import util.Utils;
 
@@ -12,6 +13,8 @@ import java.io.IOException;
 
 @WebServlet("/add_user")
 public class AddUserServlet extends HttpServlet {
+
+    private UserService userService = UserServiceImpl.getInstance();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -25,10 +28,10 @@ public class AddUserServlet extends HttpServlet {
             final String age = req.getParameter("age");
 
             final User user = new User();
-            user.setAge(Long.valueOf(age));
+            user.setAge(Long.parseLong(age));
             user.setName(name);
 
-            UserServiceImpl.getInstance().addUser(user);
+            userService.addUser(user);
         }
 
         resp.sendRedirect(req.getContextPath() + "/");

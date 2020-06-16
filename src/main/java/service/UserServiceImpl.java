@@ -2,12 +2,13 @@ package service;
 
 import dao.UserDAO;
 import dao.UserDaoFactory;
-import dao.UserHibernateDAO;
 import model.User;
 
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
+
+    private UserDAO userDAO = UserDaoFactory.configure();
 
     private static UserServiceImpl userService;
 
@@ -23,35 +24,26 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllUser() {
-        return getUsertDAO().getAllUser();
+        return userDAO.getAllUser();
     }
 
     @Override
     public void deleteUser(int id) {
-        getUsertDAO().delete(id);
+        userDAO.delete(id);
     }
 
     @Override
     public void addUser(User user) {
-        getUsertDAO().insert(user);
+        userDAO.insert(user);
     }
 
     @Override
     public void update(User user) {
-        getUsertDAO().update(user);
+        userDAO.update(user);
     }
 
     @Override
     public User getUserById(int id) {
-        return getUsertDAO().getUserById(id);
+        return userDAO.getUserById(id);
     }
-
-    public void createTable() {
-        getUsertDAO().createTable();
-    }
-
-    private UserDAO getUsertDAO() {
-        return UserDaoFactory.configure();
-    }
-
 }
