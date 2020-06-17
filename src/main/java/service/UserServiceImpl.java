@@ -8,11 +8,13 @@ import java.util.List;
 
 public class UserServiceImpl implements UserService {
 
-    private UserDAO userDAO = UserDaoFactory.configure();
+    private UserDAO userDAO;
 
     private static UserServiceImpl userService;
 
     private UserServiceImpl() {
+        UserDaoFactory daoFactory = UserDaoFactory.configure();
+        userDAO = daoFactory.getUserDAO();
     }
 
     public static UserServiceImpl getInstance() {

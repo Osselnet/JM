@@ -4,14 +4,19 @@ import util.WorkWithProperty;
 
 import java.util.Objects;
 
-public class UserDaoFactory {
+public abstract class UserDaoFactory {
 
-    public static UserDAO configure() {
+    private static final String Jdbc = "UserJdbcDAO";
+    private static final String Hibernate = "UserHibernateDAO";
+
+    public abstract UserDAO getUserDAO();
+
+    public static UserDaoFactory configure() {
         switch (Objects.requireNonNull(WorkWithProperty.getProperty())) {
-            case "UserJdbcDAO":
-                return new UserJdbcDAO();
-            case "UserHibernateDAO":
-                return new UserHibernateDAO();
+            case Jdbc:
+                return new JdbcUserDAOFactory();
+            case Hibernate:
+                return new HibernateUserDAOFactory();
             default:
                 return null;
         }

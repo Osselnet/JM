@@ -18,7 +18,6 @@ public class UserHibernateDAO implements UserDAO {
     @Override
     public void insert(User user) {
         session.save(user);
-        session.close();
     }
 
     @Override
@@ -27,7 +26,6 @@ public class UserHibernateDAO implements UserDAO {
         query.setParameter("userName", user.getName());
         query.setParameter("userId", user.getId());
         query.executeUpdate();
-        session.close();
     }
 
     @Override
@@ -35,14 +33,12 @@ public class UserHibernateDAO implements UserDAO {
         Query query = session.createQuery("delete User where id = :userId");
         query.setParameter("userId", id);
         query.executeUpdate();
-        session.close();
-    }
+     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<User> getAllUser() {
-        List<User> users = session.createQuery("from User").list();
-        session.close();
-        return users;
+        return (List<User>) session.createQuery("from User").list();
     }
 
     @Override
@@ -53,8 +49,6 @@ public class UserHibernateDAO implements UserDAO {
     public User getUserById(long id) {
         Query query = session.createQuery("FROM User WHERE id = :userId");
         query.setParameter("userId", id);
-        User user = (User) query.list().get(0);
-        session.close();
-        return user;
+        return (User) query.uniqueResult();
     }
 }
