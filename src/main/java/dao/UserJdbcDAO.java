@@ -35,7 +35,7 @@ public class UserJdbcDAO implements UserDAO {
 
     @Override
     public void delete(long id) {
-        try (Statement stmt = connection.createStatement();) {
+        try (Statement stmt = connection.createStatement()) {
             stmt.execute("DELETE FROM users WHERE id=" + id);
         } catch (SQLException ignored) {
         }
