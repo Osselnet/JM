@@ -1,6 +1,6 @@
 package util;
 
-import dao.UserDaoFactory;
+import factory.UserDaoFactory;
 
 import java.io.IOException;
 import java.io.InputStream;

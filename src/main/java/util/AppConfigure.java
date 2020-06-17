@@ -1,15 +1,14 @@
-package dao;
+package util;
 
-import util.WorkWithProperty;
+import factory.HibernateUserDAOFactory;
+import factory.JdbcUserDAOFactory;
+import factory.UserDaoFactory;
 
 import java.util.Objects;
 
-public abstract class UserDaoFactory {
-
+public class AppConfigure {
     private static final String Jdbc = "UserJdbcDAO";
     private static final String Hibernate = "UserHibernateDAO";
-
-    public abstract UserDAO getUserDAO();
 
     public static UserDaoFactory configure() {
         switch (Objects.requireNonNull(WorkWithProperty.getProperty())) {
