@@ -1,18 +1,21 @@
 package service;
 
 import dao.UserDAO;
-import dao.UserDaoFactory;
+import factory.UserDaoFactory;
 import model.User;
+import util.AppConfigure;
 
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
 
-    private UserDAO userDAO = UserDaoFactory.configure();
+    private UserDAO userDAO;
 
     private static UserServiceImpl userService;
 
     private UserServiceImpl() {
+        UserDaoFactory daoFactory = AppConfigure.configure();
+        userDAO = daoFactory.getUserDAO();
     }
 
     public static UserServiceImpl getInstance() {
