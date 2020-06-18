@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/admin")
-public class GetIndexPageServlet extends HttpServlet {
+public class AdminPageServlet extends HttpServlet {
 
     private UserService userService = UserServiceImpl.getInstance();
 
