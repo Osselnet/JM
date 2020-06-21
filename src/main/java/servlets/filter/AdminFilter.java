@@ -13,23 +13,19 @@ import java.util.Objects;
 @WebFilter("/admin")
 public class AdminFilter implements Filter {
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
+            throws IOException, ServletException {
 
         final HttpServletRequest req = (HttpServletRequest) servletRequest;
         final HttpServletResponse res = (HttpServletResponse) servletResponse;
         final HttpSession session = req.getSession();
 
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("userObject");
 
-        switch (Objects.requireNonNull(user.getRole())) {
-            case "admin":
-                filterChain.doFilter(req, res);
-                break;
-            case "user":
-                res.sendRedirect(req.getContextPath() + "/user");
-                break;
-            default:
-                res.sendRedirect(req.getContextPath() + "/");
+        if (user.getRole().equals("admin")) {
+            filterChain.doFilter(req, res);
+        } else {
+            res.sendRedirect(req.getContextPath() + "/login");
         }
     }
 }
