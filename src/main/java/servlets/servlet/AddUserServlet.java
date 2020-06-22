@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/add_user")
+@WebServlet("/admin/add_user")
 public class AddUserServlet extends HttpServlet {
 
     private UserService userService = UserServiceImpl.getInstance();
@@ -34,6 +34,6 @@ public class AddUserServlet extends HttpServlet {
             userService.addUser(user);
         }
 
-        resp.sendRedirect(req.getContextPath() + "/");
+        resp.sendRedirect(req.getContextPath() + "/admin");
     }
 }

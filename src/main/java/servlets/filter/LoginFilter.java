@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter("/login")
+@WebFilter("/*")
 public class LoginFilter implements Filter {
 
     @Override
@@ -24,7 +24,7 @@ public class LoginFilter implements Filter {
         User user;
         boolean isUserRole = false;
         boolean isAdminRole = false;
-        if (isAuth) {
+         if (isAuth) {
             user = (User) session.getAttribute("userObject");
             isUserRole = user.getRole().equals("user");
             isAdminRole = user.getRole().equals("admin");
@@ -32,10 +32,10 @@ public class LoginFilter implements Filter {
 
         if (isAdminRole) {
             res.sendRedirect(req.getContextPath() + "/admin");
-        } else if (isUserRole) {
-            res.sendRedirect(req.getContextPath() + "/user");
+         } else if (isUserRole) {
+            servletRequest.getRequestDispatcher("/user").forward(servletRequest, servletResponse);
         } else {
-            res.sendRedirect(req.getContextPath() + "/");
+            filterChain.doFilter(servletRequest, servletResponse);
         }
     }
 }
