@@ -18,7 +18,7 @@ public class UserPageServlet extends HttpServlet {
             throws ServletException, IOException {
 
         final HttpSession session = req.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("userObject");
 
         req.setAttribute("user", user);
         req.getRequestDispatcher("/WEB-INF/view/user_menu.jsp").forward(req, resp);

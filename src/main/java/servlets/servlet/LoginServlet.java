@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("/login")
+@WebServlet("/")
 public class LoginServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -34,7 +34,7 @@ public class LoginServlet extends HttpServlet {
 
             session.setAttribute("userObject", userService.getUserByName(login));
 
-            resp.sendRedirect(req.getContextPath() + "/admin");
+            resp.sendRedirect(req.getContextPath() + "/login");
         } else {
             req.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(req, resp);
         }

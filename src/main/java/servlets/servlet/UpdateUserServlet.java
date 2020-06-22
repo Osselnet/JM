@@ -39,7 +39,7 @@ public class UpdateUserServlet extends HttpServlet {
 
         if (Utils.idIsNumber(req)) {
             user = userService.getUserById(Integer.parseInt(req.getParameter("id")));
-            req.setAttribute("user", user);
+            req.setAttribute("userObject", user);
         }
         req.getRequestDispatcher("/WEB-INF/view/update.jsp")
                 .forward(req, resp);
